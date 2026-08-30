@@ -186,3 +186,8 @@ SQL Server - InventarioSOAPDB
 ```
 
 El servicio recibe el mensaje XML, ejecuta la operación solicitada, consulta o modifica la base de datos y devuelve una respuesta SOAP en formato XML.
+
+Autor
+Estudiante: Steven Fabián Santander Montoya
+Asignatura: Programación Web
+Paralelo: Tercero A Matutina
