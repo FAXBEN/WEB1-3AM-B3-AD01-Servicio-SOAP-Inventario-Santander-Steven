@@ -1,0 +1,54 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Compilación .NET
+bin/
+obj/
+
+[Bb]in/
+[Oo]bj/
+
+Debug/
+Release/
+
+x64/
+x86/
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# Archivos locales / secretos
+appsettings.Local.json
+*.secrets.json
+
+# Base de datos local
+*.mdf
+*.ldf
+*.db
+*.sqlite

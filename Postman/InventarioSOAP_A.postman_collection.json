@@ -1,0 +1,335 @@
+{
+  "info": {
+    "_postman_id": "33d40265-2abf-4928-bcfa-a8be789d456a",
+    "name": "InventarioSOAP_A",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57563977",
+    "_collection_link": "https://go.postman.co/collection/57563977-33d40265-2abf-4928-bcfa-a8be789d456a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ObtenerCategorias",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ObtenerCategorias\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerCategorias/>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>    ",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc?=&=",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "type": "text"
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerProductos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ObtenerProductos\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerProductos/>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerProducto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ObtenerProducto\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerProducto>\r\n            <tem:id>1</tem:id>\r\n        </tem:ObtenerProducto>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarProducto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/AgregarProducto\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:mod=\"http://schemas.datacontract.org/2004/07/InventarioSOAP_A.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:AgregarProducto>\r\n            <tem:producto>\r\n                <mod:Descripcion>\r\n                    Café colombiano de tueste medio y notas de chocolate.\r\n                </mod:Descripcion>\r\n                <mod:Estado>true</mod:Estado>\r\n                <mod:IdCategoria>1</mod:IdCategoria>\r\n                <mod:IdProducto>0</mod:IdProducto>\r\n                <mod:Nombre>Café Niebla Andina 500 g</mod:Nombre>\r\n                <mod:Precio>38500.00</mod:Precio>\r\n                <mod:Stock>20</mod:Stock>\r\n            </tem:producto>\r\n        </tem:AgregarProducto>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarProducto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ActualizarProducto\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:mod=\"http://schemas.datacontract.org/2004/07/InventarioSOAP_A.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ActualizarProducto>\r\n            <tem:producto>\r\n                <mod:Descripcion>\r\n                    Café colombiano actualizado, con notas de chocolate y panela.\r\n                </mod:Descripcion>\r\n                <mod:Estado>true</mod:Estado>\r\n                <mod:IdCategoria>1</mod:IdCategoria>\r\n                <mod:IdProducto>1</mod:IdProducto>\r\n                <mod:Nombre>Café Niebla Andina Premium 500 g</mod:Nombre>\r\n                <mod:Precio>42000.00</mod:Precio>\r\n                <mod:Stock>25</mod:Stock>\r\n            </tem:producto>\r\n        </tem:ActualizarProducto>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarProducto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/EliminarProducto\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:EliminarProducto>\r\n            <tem:id>9</tem:id>\r\n        </tem:EliminarProducto>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerProductosPorPrecio",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ObtenerProductosPorPrecio\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerProductosPorPrecio>\r\n            <tem:precioMinimo>10000.00</tem:precioMinimo>\r\n            <tem:precioMaximo>40000.00</tem:precioMaximo>\r\n        </tem:ObtenerProductosPorPrecio>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerProductosPorCategoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "\"http://tempuri.org/ICatalogoService/ObtenerProductosPorCategoria\"",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerProductosPorCategoria>\r\n            <tem:idCategoria>1</tem:idCategoria>\r\n        </tem:ObtenerProductosPorCategoria>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5163/CatalogoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5163",
+          "path": [
+            "CatalogoService.svc"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
