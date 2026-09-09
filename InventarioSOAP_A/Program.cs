@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 builder.Services.AddDbContext<InventarioDBContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("InventarioConnection")
@@ -20,7 +22,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AngularApp", policy =>
     {
         policy
-            .WithOrigins("http://localhost:4200", "http://127.0.0.1:4200")
+            .WithOrigins("http://localhost:4200", "http://127.0.0.1:4200",
+                         "http://localhost:4201", "http://127.0.0.1:4201")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -53,6 +56,8 @@ app.UseServiceModel(serviceBuilder =>
             "/CatalogoService.svc"
         );
 });
+
+app.MapControllers();
 
 var metadataBehavior =
     app.Services.GetRequiredService<ServiceMetadataBehavior>();

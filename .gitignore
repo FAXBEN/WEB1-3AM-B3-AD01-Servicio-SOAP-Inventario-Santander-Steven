@@ -52,3 +52,17 @@ appsettings.Local.json
 *.ldf
 *.db
 *.sqlite
+
+# Angular y artefactos generados
+node_modules/
+.angular/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+
+# Material local que no forma parte de la AA
+Actividad_Bloque_3/
+output/
+tmp/

@@ -14,6 +14,8 @@ namespace InventarioSOAP_A.Data
 
         public DbSet<Producto> Productos { get; set; }
 
+        public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Categoria>(entity =>
@@ -38,6 +40,40 @@ namespace InventarioSOAP_A.Data
                     .WithMany(c => c.Productos)
                     .HasForeignKey(p => p.IdCategoria)
                     .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<MovimientoInventario>(entity =>
+            {
+                entity.ToTable("Movimiento_Inventario", table =>
+                {
+                    table.HasCheckConstraint(
+                        "CK_MovimientoInventario_Tipo",
+                        "UPPER([TipoMovimiento]) IN ('ENTRADA', 'SALIDA')");
+                    table.HasCheckConstraint(
+                        "CK_MovimientoInventario_Cantidad",
+                        "[Cantidad] > 0");
+                });
+
+                entity.HasKey(m => m.IdMovimiento);
+                entity.Property(m => m.IdMovimiento).ValueGeneratedOnAdd();
+                entity.Property(m => m.TipoMovimiento)
+                    .IsRequired()
+                    .HasMaxLength(20);
+                entity.Property(m => m.FechaMovimiento)
+                    .HasColumnType("datetime2(0)")
+                    .HasDefaultValueSql("SYSDATETIME()");
+                entity.Property(m => m.Observacion).HasMaxLength(500);
+
+                entity.HasIndex(m => m.IdProducto)
+                    .HasDatabaseName("IX_MovimientoInventario_IdProducto");
+                entity.HasIndex(m => m.FechaMovimiento)
+                    .HasDatabaseName("IX_MovimientoInventario_Fecha");
+
+                entity.HasOne(m => m.Producto)
+                    .WithMany(p => p.Movimientos)
+                    .HasForeignKey(m => m.IdProducto)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_MovimientoInventario_Productos");
             });
         }
     }

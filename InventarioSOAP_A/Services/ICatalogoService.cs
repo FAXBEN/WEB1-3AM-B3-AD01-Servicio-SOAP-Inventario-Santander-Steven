@@ -10,6 +10,15 @@ namespace InventarioSOAP_A.Services
         List<Categoria> ObtenerCategorias();
 
         [OperationContract]
+        Categoria AgregarCategoria(Categoria categoria);
+
+        [OperationContract]
+        Categoria? ActualizarCategoria(Categoria categoria);
+
+        [OperationContract]
+        bool EliminarCategoria(int id);
+
+        [OperationContract]
         List<Producto> ObtenerProductos();
 
         [OperationContract]

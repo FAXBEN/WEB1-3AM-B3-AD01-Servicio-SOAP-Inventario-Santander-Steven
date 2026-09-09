@@ -1,0 +1,37 @@
+@Inventario_HostAddress = http://localhost:5163
+@movimientoId = 1
+
+### Obtener lista
+GET {{Inventario_HostAddress}}/api/MovimientoInventario
+Accept: application/json
+
+### Obtener registro
+GET {{Inventario_HostAddress}}/api/MovimientoInventario/{{movimientoId}}
+Accept: application/json
+
+### Guardar registro
+POST {{Inventario_HostAddress}}/api/MovimientoInventario
+Content-Type: application/json
+
+{
+  "idProducto": 1,
+  "tipoMovimiento": "ENTRADA",
+  "cantidad": 6,
+  "fechaMovimiento": "2026-09-01T21:00:00",
+  "observacion": "Movimiento creado desde el archivo HTTP"
+}
+
+### Actualizar registro
+PUT {{Inventario_HostAddress}}/api/MovimientoInventario/{{movimientoId}}
+Content-Type: application/json
+
+{
+  "idProducto": 3,
+  "tipoMovimiento": "SALIDA",
+  "cantidad": 2,
+  "fechaMovimiento": "2026-09-01T21:15:00",
+  "observacion": "Movimiento actualizado"
+}
+
+### Eliminar registro
+DELETE {{Inventario_HostAddress}}/api/MovimientoInventario/{{movimientoId}}

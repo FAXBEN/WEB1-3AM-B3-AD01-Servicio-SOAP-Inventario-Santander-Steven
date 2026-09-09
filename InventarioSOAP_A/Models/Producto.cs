@@ -25,5 +25,9 @@ namespace InventarioSOAP_A.Models
 
         [IgnoreDataMember]
         public Categoria? Categoria { get; set; }
+
+        [IgnoreDataMember]
+        public ICollection<MovimientoInventario> Movimientos { get; set; } =
+            new List<MovimientoInventario>();
     }
 }

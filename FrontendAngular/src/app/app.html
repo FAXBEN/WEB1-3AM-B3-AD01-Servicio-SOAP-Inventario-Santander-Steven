@@ -1,0 +1,128 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 8.5h11v5.25A5.25 5.25 0 0 1 10.75 19h-.5A5.25 5.25 0 0 1 5 13.75V8.5Z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 5.5c.5-.8 1.5-.8 2-1.7M13 5.5c.5-.8 1.5-.8 2-1.7"/></svg>
+      </div>
+      <div><span class="brand-name">Origen</span><span class="brand-caption">Inventario artesanal</span></div>
+    </div>
+
+    <nav class="nav-menu" aria-label="Navegación principal">
+      <a href="#resumen" class="nav-item"><svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>Resumen</a>
+      <a href="#productos" class="nav-item"><svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"/></svg>Productos</a>
+      <a href="#gestion-categorias" class="nav-item"><svg viewBox="0 0 24 24"><path d="M4 5h6v6H4V5Zm10 0h6v6h-6V5ZM4 15h6v4H4v-4Zm10 0h6v4h-6v-4Z"/></svg>Categorías</a>
+      <a href="#movimientos" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg>Movimientos</a>
+      <a href="#catalogo-externo" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a20 20 0 0 1 0 18 20 20 0 0 1 0-18Z"/></svg>Catálogo externo</a>
+    </nav>
+
+    <div class="service-card">
+      <div class="service-status"><span class="status-dot" [class.offline]="!servicioDisponible"></span>{{ servicioDisponible ? 'Servicio conectado' : 'Servicio sin conexión' }}</div>
+      <span>SOAP · Puerto 5163</span>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div><span class="eyebrow">Panel de administración</span><h1>Buenos días, Inventario</h1><p class="date-label">{{ fechaActual }}</p></div>
+      <button type="button" class="button button-primary" (click)="abrirNuevoProducto()"><span class="button-icon">+</span>Nuevo producto</button>
+    </header>
+
+    <section id="resumen" class="hero-panel">
+      <div class="hero-copy">
+        <span class="hero-tag">Catálogo activo</span>
+        <h2>Todo tu inventario,<br><em>en un solo lugar.</em></h2>
+        <p>Consulta existencias, organiza categorías y mantén actualizado cada producto artesanal.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="bean bean-one"></div><div class="bean bean-two"></div>
+        <div class="cup"><div class="cup-steam steam-one"></div><div class="cup-steam steam-two"></div><div class="cup-body"></div><div class="cup-handle"></div><div class="cup-saucer"></div></div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Resumen del inventario">
+      <article class="stat-card"><div class="stat-icon terracotta"><svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"/></svg></div><div><span>Productos</span><strong>{{ productos.length }}</strong></div><small>Referencias registradas</small></article>
+      <article class="stat-card"><div class="stat-icon olive"><svg viewBox="0 0 24 24"><path d="M5 19V9m7 10V4m7 15v-7"/></svg></div><div><span>Unidades</span><strong>{{ stockTotal }}</strong></div><small>Disponibles en stock</small></article>
+      <article class="stat-card"><div class="stat-icon cocoa"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-1.4-2.2-2.5-5-2.5S7 5.1 7 6.5 9.2 9 12 9s5 1.1 5 2.5S14.8 14 12 14s-5 1.1-5 2.5S9.2 19 12 19s5-1.1 5-2.5"/></svg></div><div><span>Valor estimado</span><strong>{{ formatoMoneda(valorInventario) }}</strong></div><small>Precio por existencias</small></article>
+      <article class="stat-card"><div class="stat-icon sand"><svg viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M10.3 3.8 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.8a2 2 0 0 0-3.4 0Z"/></svg></div><div><span>Stock bajo</span><strong>{{ productosStockBajo }}</strong></div><small>10 unidades o menos</small></article>
+    </section>
+
+    <section id="categorias" class="section-block">
+      <div class="section-heading"><div><span class="eyebrow">Explorar catálogo</span><h2>Categorías</h2></div><span class="section-count">{{ categorias.length }} colecciones</span></div>
+      <div class="category-grid">
+        @for (categoria of categorias; track categoria.idCategoria; let indice = $index) {
+          <button type="button" [class]="'category-card category-' + (indice + 1)" (click)="seleccionarCategoria(categoria.idCategoria)">
+            <span class="category-number">0{{ indice + 1 }}</span>
+            <span class="category-symbol" aria-hidden="true">@switch (indice) {@case (0) { ☕ } @case (1) { ◈ } @case (2) { ❧ } @default { ◉ }}</span>
+            <strong>{{ categoria.nombre }}</strong><span>{{ cantidadPorCategoria(categoria.idCategoria) }} productos</span><i>Ver categoría →</i>
+          </button>
+        }
+      </div>
+    </section>
+
+    <section id="productos" class="section-block catalog-section">
+      <div class="section-heading catalog-heading">
+        <div><span class="eyebrow">Gestión de existencias</span><h2>Productos</h2><p>{{ descripcionFiltro }}</p></div>
+        <button type="button" class="button button-secondary" (click)="cargarDatos()">↻ Actualizar</button>
+      </div>
+
+      <div class="filter-panel">
+        <label class="search-field field-grow"><span>Buscar en resultados</span><div class="input-with-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" [(ngModel)]="textoBusqueda" placeholder="Nombre, descripción o categoría"></div></label>
+        <label class="search-field"><span>Por categoría</span><select [(ngModel)]="categoriaSeleccionada" (change)="filtrarPorCategoria()"><option [ngValue]="0">Todas</option>@for (categoria of categorias; track categoria.idCategoria) {<option [ngValue]="categoria.idCategoria">{{ categoria.nombre }}</option>}</select></label>
+        <div class="search-field id-filter"><span>Buscar por ID</span><div class="inline-control"><input type="number" min="1" [(ngModel)]="idBusqueda" placeholder="Ej. 3" (keyup.enter)="buscarPorId()"><button type="button" (click)="buscarPorId()">Buscar</button></div></div>
+        <div class="search-field price-filter"><span>Rango de precios</span><div class="inline-control"><input type="number" min="0" [(ngModel)]="precioMinimo" placeholder="Mínimo"><input type="number" min="0" [(ngModel)]="precioMaximo" placeholder="Máximo"><button type="button" (click)="filtrarPorPrecio()">Filtrar</button></div></div>
+        <button type="button" class="clear-button" (click)="limpiarFiltros()">Limpiar filtros</button>
+      </div>
+
+      <div class="table-card">
+        @if (cargando || cargandoProductos) {
+          <div class="loading-state"><span class="loader"></span><strong>Consultando el catálogo</strong><p>Obteniendo información desde el servicio SOAP…</p></div>
+        } @else if (productosVisibles.length === 0) {
+          <div class="empty-state"><span>⌕</span><strong>No encontramos productos</strong><p>Prueba con otros filtros o vuelve a mostrar todo el catálogo.</p><button type="button" class="button button-secondary" (click)="limpiarFiltros()">Mostrar todos</button></div>
+        } @else {
+          <div class="table-summary"><span><strong>{{ productosVisibles.length }}</strong> resultados</span><span>Información sincronizada con InventarioSOAPDB</span></div>
+          <div class="table-scroll"><table>
+            <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th><span class="sr-only">Acciones</span></th></tr></thead>
+            <tbody>
+              @for (producto of productosVisibles; track producto.idProducto) {
+                <tr>
+                  <td data-label="Producto"><div class="product-cell"><span class="product-avatar">{{ producto.nombre.charAt(0) }}</span><div><strong>{{ producto.nombre }}</strong><span>ID {{ producto.idProducto }} · {{ producto.descripcion }}</span></div></div></td>
+                  <td data-label="Categoría"><span class="category-pill">{{ nombreCategoria(producto.idCategoria) }}</span></td>
+                  <td data-label="Precio"><strong class="price-value">{{ formatoMoneda(producto.precio) }}</strong></td>
+                  <td data-label="Stock"><span [class]="'stock-pill ' + claseStock(producto.stock)">{{ producto.stock }} uds.</span></td>
+                  <td data-label="Estado"><span class="state-pill" [class.inactive]="!producto.estado"><i></i>{{ producto.estado ? 'Activo' : 'Inactivo' }}</span></td>
+                  <td class="actions-cell"><button type="button" class="icon-button edit" title="Editar producto" (click)="abrirEdicion(producto)">✎</button><button type="button" class="icon-button delete" title="Eliminar producto" (click)="eliminarProducto(producto)">×</button></td>
+                </tr>
+              }
+            </tbody>
+          </table></div>
+        }
+      </div>
+    </section>
+
+    <app-categorias [categorias]="categorias" (cambio)="cargarDatos()" />
+    <app-movimientos [productos]="productos" />
+    <app-catalogo-externo [productos]="productos" [categorias]="categorias" />
+    <footer><span>InventarioSOAP_A</span><span>Angular + SOAP + REST + API pública · Programación Web I</span></footer>
+  </main>
+</div>
+
+@if (mostrarFormulario) {
+  <div class="modal-backdrop" (mousedown)="cerrarFormulario()">
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="form-title" (mousedown)="$event.stopPropagation()">
+      <header class="modal-header"><div><span class="eyebrow">{{ modoEdicion ? 'Actualizar registro' : 'Nuevo registro' }}</span><h2 id="form-title">{{ modoEdicion ? 'Editar producto' : 'Agregar producto' }}</h2></div><button type="button" class="modal-close" aria-label="Cerrar" (click)="cerrarFormulario()">×</button></header>
+      <form (ngSubmit)="guardarProducto()" class="product-form">
+        <label class="form-field full-width"><span>Nombre del producto *</span><input name="nombre" maxlength="150" required [(ngModel)]="productoFormulario.nombre" placeholder="Ej. Café Reserva del Bosque"></label>
+        <label class="form-field full-width"><span>Descripción</span><textarea name="descripcion" maxlength="500" rows="3" [(ngModel)]="productoFormulario.descripcion" placeholder="Describe sus características principales"></textarea></label>
+        <label class="form-field full-width"><span>Categoría *</span><select name="categoria" required [(ngModel)]="productoFormulario.idCategoria"><option [ngValue]="0" disabled>Selecciona una categoría</option>@for (categoria of categorias; track categoria.idCategoria) {<option [ngValue]="categoria.idCategoria">{{ categoria.nombre }}</option>}</select></label>
+        <label class="form-field"><span>Precio *</span><div class="money-input"><i>$</i><input name="precio" type="number" min="0" step="0.01" required [(ngModel)]="productoFormulario.precio"></div></label>
+        <label class="form-field"><span>Unidades en stock *</span><input name="stock" type="number" min="0" required [(ngModel)]="productoFormulario.stock"></label>
+        <label class="status-toggle full-width"><input name="estado" type="checkbox" [(ngModel)]="productoFormulario.estado"><span class="toggle-track"><i></i></span><span><strong>Producto activo</strong><small>Visible y disponible en el catálogo</small></span></label>
+        <div class="form-actions full-width"><button type="button" class="button button-ghost" (click)="cerrarFormulario()">Cancelar</button><button type="submit" class="button button-primary" [disabled]="guardando">{{ guardando ? 'Guardando…' : (modoEdicion ? 'Guardar cambios' : 'Agregar producto') }}</button></div>
+      </form>
+    </section>
+  </div>
+}
+
+@if (mensajeToast) {
+  <div class="toast" [class.toast-error]="tipoToast === 'error'" role="status"><span>{{ tipoToast === 'exito' ? '✓' : '!' }}</span>{{ mensajeToast }}</div>
+}

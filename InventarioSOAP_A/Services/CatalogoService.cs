@@ -40,6 +40,7 @@ namespace InventarioSOAP_A.Services
 
         public Producto AgregarProducto(Producto producto)
         {
+            ValidarProducto(producto);
             ValidarCategoria(producto.IdCategoria);
 
             producto.IdProducto = 0;
@@ -52,6 +53,7 @@ namespace InventarioSOAP_A.Services
 
         public Producto? ActualizarProducto(Producto producto)
         {
+            ValidarProducto(producto);
             var productoExistente = _context.Productos.Find(producto.IdProducto);
 
             if (productoExistente == null) return null;
@@ -74,6 +76,9 @@ namespace InventarioSOAP_A.Services
             var producto = _context.Productos.Find(id);
 
             if (producto == null) return false;
+
+            if (_context.MovimientosInventario.Any(m => m.IdProducto == id))
+                throw new FaultException("No se puede eliminar un producto con movimientos. Elimine primero sus movimientos o desactive el producto.");
 
             _context.Productos.Remove(producto);
             _context.SaveChanges();
@@ -108,6 +113,57 @@ namespace InventarioSOAP_A.Services
             {
                 throw new FaultException("La categoría indicada no existe.");
             }
+        }
+
+        public Categoria AgregarCategoria(Categoria categoria)
+        {
+            ValidarDatosCategoria(categoria);
+            categoria.IdCategoria = 0;
+            categoria.Productos = new List<Producto>();
+            _context.Categorias.Add(categoria);
+            _context.SaveChanges();
+            return categoria;
+        }
+
+        public Categoria? ActualizarCategoria(Categoria categoria)
+        {
+            ValidarDatosCategoria(categoria);
+            var existente = _context.Categorias.Find(categoria.IdCategoria);
+            if (existente == null) return null;
+            existente.Nombre = categoria.Nombre;
+            existente.Descripcion = categoria.Descripcion;
+            existente.Estado = categoria.Estado;
+            _context.SaveChanges();
+            return existente;
+        }
+
+        public bool EliminarCategoria(int id)
+        {
+            var categoria = _context.Categorias.Find(id);
+            if (categoria == null) return false;
+            if (_context.Productos.Any(p => p.IdCategoria == id))
+                throw new FaultException("No se puede eliminar una categoría que tiene productos. Reasigne sus productos o desactive la categoría.");
+            _context.Categorias.Remove(categoria);
+            _context.SaveChanges();
+            return true;
+        }
+
+        private static void ValidarDatosCategoria(Categoria categoria)
+        {
+            if (categoria == null || string.IsNullOrWhiteSpace(categoria.Nombre) || categoria.Nombre.Length > 150)
+                throw new FaultException("El nombre de la categoría es obligatorio y admite hasta 150 caracteres.");
+            if (categoria.Descripcion?.Length > 500)
+                throw new FaultException("La descripción admite hasta 500 caracteres.");
+            categoria.Nombre = categoria.Nombre.Trim();
+        }
+
+        private static void ValidarProducto(Producto producto)
+        {
+            if (producto == null || string.IsNullOrWhiteSpace(producto.Nombre) || producto.Nombre.Length > 150)
+                throw new FaultException("El nombre del producto es obligatorio y admite hasta 150 caracteres.");
+            if (producto.Descripcion?.Length > 500 || producto.Precio < 0 || producto.Stock < 0)
+                throw new FaultException("Revise la descripción (máximo 500 caracteres), el precio y el stock (no negativos).");
+            producto.Nombre = producto.Nombre.Trim();
         }
     }
 }
