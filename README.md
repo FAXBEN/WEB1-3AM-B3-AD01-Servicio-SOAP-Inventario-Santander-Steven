@@ -391,5 +391,6 @@ El archivo `.gitignore` excluye dependencias y archivos generados, como `bin`, `
 
 **Steven Fabián Santander Montoya**
 
-Tercero A Matutina  
+Asignatura: Programación Web I  
+Paralelo: Tercero A Matutina  
 Desarrollo de software.
