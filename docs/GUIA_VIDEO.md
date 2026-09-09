@@ -44,4 +44,4 @@ Muestra el README, las URL, las carpetas del repositorio y resume cómo se conec
 - Subir o adjuntar el video según el aula y verificar que el docente tenga acceso.
 - Entregar los enlaces de repositorio y video en el aula antes del plazo del PDF (09/09/2026, 23:59).
 
-No se han realizado automáticamente el commit, push, grabación ni entrega en el aula.
+El video de entrega está en [docs/video/AA_Programacion_Web_I_Santander_Steven.mp4](video/AA_Programacion_Web_I_Santander_Steven.mp4). El repositorio ya incluye frontend, SQL, Postman y este video. Falta pegar ambos enlaces en el aula/Teams.

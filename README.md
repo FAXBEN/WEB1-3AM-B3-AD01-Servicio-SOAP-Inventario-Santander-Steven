@@ -1,5 +1,11 @@
 # Inventario SOAP, REST y Angular
 
+**Repositorio:** [WEB1-3AM-B3-AD01-Servicio-SOAP-Inventario-Santander-Steven](https://github.com/FAXBEN/WEB1-3AM-B3-AD01-Servicio-SOAP-Inventario-Santander-Steven)
+
+**Video de demostración (1 min 45 s):** [docs/video/AA_Programacion_Web_I_Santander_Steven.mp4](docs/video/AA_Programacion_Web_I_Santander_Steven.mp4) · [ver en GitHub](https://github.com/FAXBEN/WEB1-3AM-B3-AD01-Servicio-SOAP-Inventario-Santander-Steven/blob/main/docs/video/AA_Programacion_Web_I_Santander_Steven.mp4)
+
+El video muestra Angular, una operación SOAP, una operación REST, la consulta a DummyJSON y la persistencia en SQL Server. Las leyendas en pantalla explican qué servicio se ejecuta en cada paso.
+
 ## Descripción
 
 Proyecto desarrollado para la asignatura **Programación Web I**, correspondiente a **Tercero A Matutina de Desarrollo de software**.
